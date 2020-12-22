@@ -110,32 +110,14 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
         self.Ui.action_others.triggered.connect(lambda: self.Binary(self.Ui.action_others.text()))
         self.Ui.actionAbout.triggered.connect(self.about)
         self.Ui.actionAuthor.triggered.connect(self.author)
-        self.Ui.actionUpdate_2.triggered.connect(self.Update)
+
 
         self.readfile()
-        #Website
-        websitemenubar = self.menuBar()  # 获取窗体的菜单栏
-        Website = websitemenubar.addMenu("Website")
-        for i in json_data:
-            impMenu = QMenu(i, self)
-            url_list  = json_data[i].split('\n')
-            for j in url_list:
-                sub_action = QAction(QIcon(''), j, self)
-                impMenu.addAction(sub_action)
-            Website.addMenu(impMenu)
-        Website.triggered[QAction].connect(self.show_json)
-        #Plugins
-        Pluginsmenubar = self.menuBar()  # 获取窗体的菜单栏
-        plugins = Pluginsmenubar.addMenu("Plugins")
-        for k in plugins_data:
-            # print(k)
-            sub_action = QAction(QIcon(''), k, self)
-            plugins.addAction(sub_action)
-        plugins.triggered[QAction].connect(self.show_plugins)
+
         #Others
         othersmenubar = self.menuBar()  # 获取窗体的菜单栏
         others = othersmenubar.addMenu("Others")
-        for j in ["About",'Author','Update']:
+        for j in ["About",'Author']:
             sub_action = QAction(QIcon(''), j, self)
             others.addAction(sub_action)
         impMenu = QMenu("Style", self)
@@ -151,9 +133,6 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
         if q.text() =="Author":
             self.author()
             return
-        if q.text() =="Update":
-            self.Update()
-            return
         else:
             try:
                 with open("QSS/" + json_qss[q.text()], 'r', encoding='utf-8') as f:
@@ -168,32 +147,6 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
             except Exception as e:
                 QMessageBox.critical(self, 'Error', str(e))
                 pass
-    def show_plugins(self,q):
-        try:
-            plugins_methods = "Plugins/" + plugins_data[q.text()][:-3]
-            filename = "Plugins/" + plugins_data[q.text()]
-            text = self.Ui.Source_text.toPlainText()
-            if text=='':
-                self.Ui.Result_text.setText('请输入一个源字符串！')
-                return 0
-            nnnnnnnnnnnn1 = importlib.machinery.SourceFileLoader(plugins_methods, filename).load_module()
-            result = nnnnnnnnnnnn1.run(text)
-            self.Ui.Result_text.setText(str(result))
-        except Exception as e:
-            QMessageBox.critical(self, 'Error', str(e))
-            pass
-
-    def show_json(self,q):
-        # print(q.text())
-        wincld.OpenClipboard()
-        wincld.EmptyClipboard()
-        wincld.SetClipboardData(win32con.CF_UNICODETEXT, q.text())
-        wincld.CloseClipboard()
-        reply = QMessageBox.question(self, 'Message', "链接已复制到剪切板，是否在浏览器中打开链接?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-        if reply == QMessageBox.Yes:
-            webbrowser.open(q.text())
-        else:
-            pass
 
     def readfile(self):
         try:
@@ -1142,8 +1095,6 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
         box = QtWidgets.QMessageBox()
         box.setIcon(1)
         box.about(self, "Author", self.author_text)
-    def Update(self):
-        webbrowser.open("https://github.com/qianxiao996/CTF-Tools/releases")
     # 文件打开对话框
     def file_open(self, type):
         fileName, selectedFilter = QFileDialog.getOpenFileName(self, (r"上传文件"), (r"C:\windows"), type)
@@ -1157,15 +1108,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindows()
     window.show()
-    try:
-        response = requests.get("https://qianxiao996.cn/ctf-tools/version.txt",timeout = 2)
-        if (int(response.text.replace('.',''))>int(version.replace('.',''))):
-            reply = QMessageBox.question(window,'软件更新', "检测到软件已发布新版本，是否前去下载?",QMessageBox.Yes | QMessageBox.No,
-                                         QMessageBox.Yes)
-            if reply == QMessageBox.Yes:
-                webbrowser.open('https://github.com/qianxiao996/CTF-Tools/releases')
-            else:
-                pass
-    except:
-        pass
     sys.exit(app.exec_())
