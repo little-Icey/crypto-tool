@@ -1,10 +1,14 @@
 QWidget {
-    background-color:white;
+    background-color:rgb(187, 212, 239);
+}
+QMenuBar {
+        background: rgb(241, 244, 243);
+        border: none;
 }
 /**********菜单**********/
 QMenu {
         border: 1px solid rgb(176,196,222);
-        background: rgb(255, 255, 255);
+        background: rgb(200, 213, 222);
 }
 QMenu::item {
         height: 22px;
@@ -22,7 +26,7 @@ QMenu::item:enabled:selected {
 }
 QMenu::separator {
         height: 1px;
-        background: rgb(100, 100, 100);
+        background: rgb(200, 213, 243);
 }
 QMenu::indicator {
         width: 13px;
@@ -35,9 +39,9 @@ QMenu::icon {
 
 QTextEdit {
         border: 1px solid rgb(45, 45, 45);
-        background: rgb(255, 255, 255);
+        background: rgb(241,244,243);
     /* 边框颜色 */  
-    border-color:rgb(10,45,110);  
+    border-color:rgb(241,244,243);
  
     /* 边框倒角 */  
     border-radius:5px;
@@ -46,15 +50,15 @@ QTextEdit {
 QLabel
 {
     
-    color:rgb(170, 85, 255);
+    color:white;
  
-    background-color:white;
+    background-color:rgb(241.244.243);
 }
 QLineEdit {
         border-radius: 4px;
         height: 25px;
         border: 1px solid rgb(100, 100, 100);
-        background: rgb(255, 255, 255)
+        background: rgb(241, 244, 243)
 }
 QLineEdit:enabled {
         color: rgb(175, 175, 175);
@@ -71,7 +75,7 @@ QPushButton{
     width: 75px;
     height: 25px;
     /*背景颜色*/  
-    background-color:rgb(170, 170, 255);
+    background-color:rgb(180, 223, 232);
     /*边框圆角半径为8像素*/ 
     border-radius:5px;
 
@@ -79,8 +83,8 @@ QPushButton{
  
 QPushButton#Source_tihuan_Button,#Source_clear_Button,#Source_Copy_Button,#Source_Paste_Button,#Result_tihuan_Button,#Result_clear_Button,#Result_Copy_Button,#Result_Paste_Button
 {
-        /*字体为微软雅黑*/
-    font-family:Microsoft Yahei;
+     /*字体*/
+    font-family:Georgia;
     /*字体大小为10点*/
     font-size:10pt;
     /*字体颜色为白色*/    
@@ -92,14 +96,14 @@ QPushButton#Source_tihuan_Button,#Source_clear_Button,#Source_Copy_Button,#Sourc
 QPushButton:hover
 {
     /*背景颜色*/  
-    background-color:rgb(44 , 137 , 255);
+    background-color:rgb(187 , 212 , 209);
 }
  
 /*按钮按下态*/
 QPushButton:pressed
 {
     /*背景颜色*/  
-    background-color:rgb(14 , 135 , 228);
+    background-color:rgb(187 , 212 , 209);
     /*左内边距为3像素，让按下时字向右移动3像素*/  
     padding-left:3px;
     /*上内边距为3像素，让按下时字向下移动3像素*/  

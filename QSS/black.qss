@@ -1,6 +1,6 @@
 /**********子界面背景**********/
 QWidget {
-        background: rgb(68, 69, 73);
+        background: rgb(187, 212, 239);
 }
 
 /**********提示**********/
@@ -168,7 +168,7 @@ QTextEdit {
 /**********滚动区域**********/
 QScrollArea {
         border: 1px solid rgb(45, 45, 45);
-        background: rgb(57, 58, 60);
+        background: rgb(235,70,70);
 }
 
 /**********滚动区域**********/

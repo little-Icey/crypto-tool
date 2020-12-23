@@ -25,12 +25,12 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
         super(MainWindows,self).__init__(parent)
         self.Ui = Ui_MainWindow()
         self.Ui.setupUi(self)
-        self.about_text = "\t\t\tAbout\n       此程序为CTF密码学辅助工具，可进行常见的编码、解码、加密、解密操作，请勿非法使用！\n\t\t\tPowered by qianxiao996"
-        self.author_text = "作者邮箱：qianxiao996@126.com\n作者主页：https://blog.qianxiao996.cn\nGithub：https://github.com/qianxiao996"
+        self.about_text = "\t\t\tAbout\n       此程序为CTF密码学辅助工具，可进行常见的编码、解码、加密、解密操作，请勿非法使用！\n\t\t\tPowered by icey&auxein"
+        self.author_text = "作者：icey & auxein\n作者主页：https://iceyup.xyz\n\t   https://auxein.xyz"
 
-        self.setWindowTitle('CTF-Tools V '+version+' '+update_time+' By qianxiao996 ')
+        self.setWindowTitle('CTF-Tools V '+version+' '+update_time)
         # self.setFixedSize(self.width(), self.height()) ##设置宽高不可变
-        self.setWindowIcon(QtGui.QIcon('./logo.ico'))
+        self.setWindowIcon(QtGui.QIcon('./logo.png'))
         self.Ui.Source_clear_Button.clicked.connect(lambda:self.Ui.Source_text.clear())  # clear_source
         self.Ui.Result_clear_Button.clicked.connect(lambda:self.Ui.Result_text.clear())  # clear_result
         self.Ui.Source_Copy_Button.clicked.connect(lambda:self.Copy_text('Source'))  # copy_source
@@ -126,6 +126,7 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
             impMenu.addAction(sub_action)
         others.addMenu(impMenu)
         others.triggered[QAction].connect(self.show_others)
+
     def show_others(self,q):
         if q.text() =="About":
             self.about()
@@ -150,15 +151,10 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
 
     def readfile(self):
         try:
-            global json_data
-            f=open('data.json','r',encoding='utf-8')
-            json_data=json.load(f)
-            # print(json_data)
-            f.close()
+
             global json_qss
             f=open('QSS/list.txt','r',encoding='utf-8')
             json_qss=json.load(f)
-            # print(json_data)
             f.close()
             f=open('QSS/Setup.txt','r',encoding='utf-8')
             qss_Setup=json.load(f)
@@ -166,13 +162,8 @@ class MainWindows(QtWidgets.QMainWindow,Ui_MainWindow):
                 qss_style = f.read()
                 f.close()
             MainWindows.setStyleSheet(self,qss_style)
-            # print(json_data)
             f.close()
-            global plugins_data
-            f = open('Plugins/Plugins.json', 'r', encoding='utf-8')
-            plugins_data = json.load(f)
-            # print(plugins_data)
-            f.close()
+
         except Exception as e :
             QMessageBox.critical(self,'Error',str(e))
             pass
